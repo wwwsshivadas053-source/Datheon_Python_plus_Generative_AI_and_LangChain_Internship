@@ -1,0 +1,32 @@
+SOPHIA CHEN
+New York, NY | +1 (212) 555-0193 | sophia.chen.code@outlook.com
+Portfolio: https://sophiachen.dev | GitHub: https://github.com/sophia-chen-dev | LinkedIn: https://linkedin.com/in/sophiachen-swe
+
+CAREER SUMMARY
+Full-Stack Software Engineer with 4 years of experience building modern web applications, scalable REST/GraphQL APIs, and AI-assisted interfaces using React, Next.js, Python, and PostgreSQL.
+
+EMPLOYMENT HISTORY
+Full-Stack Software Engineer | Nexus Interactive, New York, NY
+August 2021 - Present
+- Built full-featured customer dashboard and payment billing portal using Next.js, TypeScript, TailwindCSS, and Stripe API, serving 250,000 active merchants.
+- Engineered Python FastAPI backend services handling webhook processing and asynchronous task queues with Celery and Redis.
+- Integrated OpenAI and Gemini APIs to enable conversational natural language search across complex catalog metadata.
+
+Junior Web Developer | BlueWave Digital Agency, Brooklyn, NY
+June 2020 - July 2021
+- Developed interactive web components and responsive landing pages using React, HTML5, and Sass.
+- Collaborated with UI/UX designers to implement design systems and improve accessibility (WCAG 2.1 AA compliant).
+
+EDUCATION
+New York University (NYU), Courant Institute of Mathematical Sciences
+Bachelor of Arts in Computer Science | 2016 - 2020 | Magna Cum Laude
+
+TECHNICAL SKILLS
+Languages: JavaScript, TypeScript, Python, HTML5, CSS3, SQL
+Frameworks & Libraries: React, Next.js, Node.js, Express, FastAPI, Redux Toolkit
+Databases & Cloud: PostgreSQL, SQLite, Supabase, Redis, AWS (S3, CloudFront), Vercel
+Tools: Git, Docker, Jest, Cypress, Postman, Figma
+
+PROJECTS
+- DevPulse: Open-source developer productivity analytics tool built with React and FastAPI (1.2k GitHub Stars).
+- SmartDocExtractor: Lightweight document summarization web app utilizing LangChain and Gemini Flash.

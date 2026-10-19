@@ -1,0 +1,7 @@
+Hi there, I am Liam O'Connor based in Chicago, IL. You can reach me on my cell 312-555-9014 or drop me an email at liam.oconnor.tech@gmail.com. Check my work on github at github.com/liam-oconnor.
+
+I have been working as a Software Engineer for about 3 years now. Currently since Feb 2023 I've been with Horizon Fintech in Chicago where my official title is Software Engineer II. Here I do backend engineering primarily with Python, Django, and PostgreSQL. I rewrote our reconciliation engine which cut daily processing time from 45 mins down to under 5 mins. Before this job, from June 2021 until January 2023 I worked at Windy City Media as an Associate Developer building PHP and Python web scrapers and maintaining MySQL databases.
+
+As for my school, I went to University of Illinois Chicago (UIC) where I earned a Bachelor of Science in Information Technology back in May 2021. 
+
+Skills I use everyday: Python, Django, Flask, FastAPI, SQL, Docker, Git, Linux, AWS EC2, and Redis. I am also comfortable with JavaScript, basic React, and HTML/CSS. I hold an AWS Certified Cloud Practitioner badge earned in 2022. I speak fluent English and intermediate Spanish.

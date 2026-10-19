@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Structured LLM Prompt Pipeline & JSON Extractor</title>
+  <meta name="description" content="Production-grade unstructured text document extraction into strictly validated Pydantic JSON schemas with LangChain and Multi-LLM support.">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="brand">
+      <div class="brand-icon">⚡</div>
+      <div>
+        <h1 class="brand-title">STRUCTURED PROMPT PIPELINE</h1>
+        <div class="brand-subtitle">LLM Document Ingestion & JSON Schema Extractor</div>
+      </div>
+    </div>
+
+    <div class="badges-group">
+      <span class="badge gemini">✦ Google Gemini</span>
+      <span class="badge openai">✦ OpenAI</span>
+      <span class="badge langchain">✦ LangChain LCEL</span>
+      <span class="badge pydantic">✦ Pydantic v2</span>
+      <span class="badge">✦ Agentic Self-Healing</span>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="app-container">
+
+    <!-- Left Sidebar: Pipeline Configuration & Controls -->
+    <aside class="sidebar-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">⚙️ Pipeline Controls</h2>
+        <span class="badge" id="providerBadge">Ready</span>
+      </div>
+
+      <!-- Domain Selection -->
+      <div class="form-group">
+        <label class="form-label" for="domainSelect">Document Domain</label>
+        <select id="domainSelect" class="select-control">
+          <option value="invoice" selected>Tax Invoice & Financial Document</option>
+          <option value="resume">Resume / CV & Candidate Profile</option>
+        </select>
+      </div>
+
+      <!-- Provider Selection -->
+      <div class="form-group">
+        <label class="form-label" for="providerSelect">LLM Engine</label>
+        <select id="providerSelect" class="select-control">
+          <option value="mock" selected>⚡ Offline Mock Provider (Instant Demo)</option>
+          <option value="gemini">Google Gemini (google-genai / JSON mode)</option>
+          <option value="openai">OpenAI (GPT-4o-mini / json_object)</option>
+          <option value="langchain_gemini">LangChain LCEL (Gemini Backend)</option>
+          <option value="langchain_openai">LangChain LCEL (OpenAI Backend)</option>
+        </select>
+      </div>
+
+      <!-- Custom API Key (Optional) -->
+      <div class="form-group" id="apiKeyGroup">
+        <label class="form-label" for="apiKeyInput">API Key (Optional override)</label>
+        <input type="password" id="apiKeyInput" class="input-control" placeholder="Leave empty to use .env or Mock">
+      </div>
+
+      <!-- Temperature Slider -->
+      <div class="form-group">
+        <label class="form-label" for="temperatureInput">
+          Temperature: <span class="value-badge" id="tempDisplay">0.1</span>
+        </label>
+        <input type="range" id="temperatureInput" min="0.0" max="1.0" step="0.05" value="0.1">
+      </div>
+
+      <!-- Few-Shot Toggle -->
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-title">Few-Shot Exemplars</span>
+          <span class="toggle-desc">Condition LLM with domain demonstrations</span>
+        </div>
+        <label class="switch" for="fewShotToggle">
+          <input type="checkbox" id="fewShotToggle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Self-Correction Retries -->
+      <div class="form-group">
+        <label class="form-label" for="maxRetriesInput">
+          Self-Correction Retries: <span class="value-badge" id="retriesDisplay">2</span>
+        </label>
+        <input type="range" id="maxRetriesInput" min="0" max="4" step="1" value="2">
+      </div>
+
+      <!-- Demo Trigger: Simulate Validation Error -->
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-title">Simulate Self-Healing</span>
+          <span class="toggle-desc">Inject error on attempt 1 to show reflection</span>
+        </div>
+        <label class="switch" for="simulateFailToggle">
+          <input type="checkbox" id="simulateFailToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Custom Instructions -->
+      <div class="form-group">
+        <label class="form-label" for="customInstructions">Custom Extraction Directives</label>
+        <input type="text" id="customInstructions" class="input-control" placeholder="e.g. Ensure VAT is converted to USD">
+      </div>
+    </aside>
+
+    <!-- Center & Right Workspace -->
+    <div class="workspace">
+
+      <!-- Column 1: Document Ingestion & Prompt Inspection -->
+      <section class="card" aria-label="Document Ingestion Card">
+        <div class="card-header-tabs">
+          <div class="tab-buttons">
+            <button class="tab-btn active" id="tabDocInput" data-tab="editorTab">Document Ingestion</button>
+            <button class="tab-btn" id="tabPromptPreview" data-tab="promptTab">Live Prompt Preview</button>
+            <button class="tab-btn" id="tabSchemaRef" data-tab="schemaTab">Target Schema</button>
+          </div>
+        </div>
+
+        <!-- Tab 1: Editor View -->
+        <div id="editorTab" class="tab-content" style="display: flex; flex-direction: column; flex: 1;">
+          <!-- Preloaded Sample Selector -->
+          <div class="sample-selector-bar">
+            <select id="sampleSelect" class="select-control" style="flex: 1;" aria-label="Select Preloaded Sample Document">
+              <option value="" disabled selected>-- Load Pre-built Messy Document --</option>
+            </select>
+          </div>
+
+          <!-- Drag and Drop Upload -->
+          <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Upload document file">
+            <input type="file" id="fileUploadInput" accept=".txt,.pdf,.docx,.md,.json" style="display: none;">
+            <span>📂</span>
+            <div class="dropzone-text">
+              Drag & Drop <span>.txt, .pdf, or .docx</span> here or <span>Browse</span>
+            </div>
+          </div>
+
+          <!-- Document Textarea -->
+          <div class="editor-wrapper">
+            <textarea id="documentEditor" class="doc-textarea" placeholder="Paste unstructured document text, invoice receipt, or candidate resume here..." aria-label="Unstructured Document Input"></textarea>
+            <div class="editor-meta-bar">
+              <span id="charCount">0 characters</span>
+              <span id="wordCount">0 words</span>
+            </div>
+          </div>
+
+          <!-- Action Button -->
+          <button id="extractBtn" class="btn-extract" type="button">
+            <span id="extractSpinner" class="spinner" style="display: none;"></span>
+            <span id="extractBtnText">⚡ Extract & Validate JSON Schema</span>
+          </button>
+        </div>
+
+        <!-- Tab 2: Prompt Preview View -->
+        <div id="promptTab" class="tab-content" style="display: none; flex-direction: column; flex: 1;">
+          <div class="json-viewer-container" style="max-height: 520px;">
+            <pre id="promptPreviewContent">Generating live prompt preview...</pre>
+          </div>
+        </div>
+
+        <!-- Tab 3: Schema Reference View -->
+        <div id="schemaTab" class="tab-content" style="display: none; flex-direction: column; flex: 1;">
+          <div class="json-viewer-container" style="max-height: 520px;">
+            <pre id="schemaRefContent">Loading target Pydantic schema definition...</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Column 2: Extraction Output & Diagnostics -->
+      <section class="card" aria-label="Structured Output Card">
+        <div class="card-header-tabs">
+          <div class="panel-title">
+            <span>✨ Structured Output</span>
+          </div>
+          <div class="results-header-actions">
+            <button class="action-btn" id="copyJsonBtn" title="Copy JSON to clipboard">📋 Copy</button>
+            <button class="action-btn" id="downloadJsonBtn" title="Download JSON file">💾 Download</button>
+            <button class="action-btn" id="toggleRawBtn" title="Toggle raw LLM text">👁️ Raw View</button>
+          </div>
+        </div>
+
+        <!-- Diagnostics & Audit Banner -->
+        <div class="audit-card" id="auditCard" style="display: none;">
+          <div class="audit-status-row">
+            <span class="status-badge success" id="statusBadge">✓ VALIDATED</span>
+            <div class="audit-metrics">
+              <div>Latency: <span id="metricLatency">0.00s</span></div>
+              <div>Attempts: <span id="metricAttempts">1</span></div>
+              <div>Engine: <span id="metricEngine">Mock</span></div>
+            </div>
+          </div>
+          <div id="auditLogText" style="font-size: 0.72rem; color: var(--text-dim); margin-top: 4px;"></div>
+        </div>
+
+        <!-- Dynamic Entity Cards Highlights -->
+        <div class="entity-cards-grid" id="entityCardsGrid" style="display: none;">
+          <!-- Dynamically populated via JS -->
+        </div>
+
+        <!-- JSON Viewer Area -->
+        <div class="json-viewer-container" id="jsonViewerWrapper">
+          <div class="empty-placeholder" id="emptyPlaceholder">
+            <div class="icon">📄</div>
+            <div style="font-weight: 600; color: var(--text-muted);">No Extraction Executed Yet</div>
+            <div style="font-size: 0.78rem;">Select a pre-loaded sample on the left and click "Extract & Validate JSON Schema" to inspect the pipeline in action.</div>
+          </div>
+          <pre id="jsonViewerContent" style="display: none;"></pre>
+          <pre id="rawViewerContent" style="display: none; color: #cbd5e1;"></pre>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">Action completed successfully</div>
+
+  <!-- Client Script -->
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

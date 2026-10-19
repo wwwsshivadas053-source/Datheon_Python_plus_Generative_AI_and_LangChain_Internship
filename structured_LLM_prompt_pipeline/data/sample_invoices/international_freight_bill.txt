@@ -1,0 +1,38 @@
+EURO-TRANS LOGISTICS B.V.
+Keizersgracht 421, 1016 EK Amsterdam, Netherlands
+VAT / BTW ID: NL884920194B01 | Chamber of Commerce (KvK): 34182910
+Email: billing@eurotrans-logistics.eu | Phone: +31 20 555 0184
+
+FREIGHT INVOICE & BILL OF LADING REF
+Invoice Ref:       ETL-2024-EUR-4819
+Issue Date:        2024-10-25
+Due Date:          2024-11-24
+Consignment Note:  CMR-994182
+Port of Origin:    Rotterdam (NLRTM)
+Port of Delivery:  Hamburg (DEHAM)
+Currency:          EUR
+
+CONSIGNEE / BILLED PARTY:
+Nordic Renewable Energy GmbH
+Industriestrasse 15, 20457 Hamburg, Germany
+VAT ID: DE294019284
+Attn: Freight Logistics Directorate (Herr Klaus Richter)
+
+CHARGES BREAKDOWN:
+Item  Description                                    Units  Unit Rate  Tax %   Amount (EUR)
+-------------------------------------------------------------------------------------------
+01    40ft High Cube Container Ocean Drayage          2.0    €1,450.00  19.0%   €2,900.00
+02    Terminal Handling Charges (THC Rotterdam)       2.0      €280.00  19.0%     €560.00
+03    Automated Customs Export Documentation Clearing 1.0      €175.00  19.0%     €175.00
+04    Fuel Surcharge (BAF / Bunker Adjustment)        1.0      €420.00  19.0%     €420.00
+05    Cargo Marine Insurance Underwriting             1.0      €150.00   0.0%     €150.00
+-------------------------------------------------------------------------------------------
+
+Subtotal (Excl. Tax): €4,205.00
+VAT / BTW (19% on €4,055.00): €770.45
+Discount (Volume Rebate): -€200.00
+Grand Total Due: €4,775.45 EUR
+
+IBAN: NL91 ABNA 0412 8849 20
+BIC / SWIFT: ABNANL2A
+Payment terms: 30 days SEPA bank transfer.

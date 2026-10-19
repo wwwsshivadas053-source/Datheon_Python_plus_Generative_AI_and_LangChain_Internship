@@ -1,0 +1,49 @@
+======================================================================
+                     CYBERDYNAMIC ENTERPRISES LLC
+                     1800 Innovation Way, Suite 500
+                         Austin, Texas 78701
+       Tel: +1 (512) 555-0142 | Email: billing@cyberdynamic.io
+                        Tax ID / EIN: 74-9102845
+======================================================================
+
+TAX INVOICE
+
+Invoice Number:   INV-2024-1109
+Date of Issue:    2024-11-04
+Payment Due Date: 2024-12-04
+PO Reference:     PO-CORP-94812
+Payment Terms:    Net 30 Days
+Currency:         USD
+
+BILLED TO:
+Vanguard Financial Technologies Inc.
+Attn: Accounts Payable Department
+45 Wall Street, 18th Floor
+New York, NY 10005
+Contact: Marcus Brody (mbrody@vanguardfin.com)
+
+------------------------------------------------------------------------------------------------------------------------
+Item  Description                                                  Qty     Unit Price   Tax %    Total Amount
+------------------------------------------------------------------------------------------------------------------------
+01    LLM Pipeline Architecture & Fine-Tuning Strategy Consulting  40.0    $185.00      8.25%    $7,400.00
+02    Enterprise RAG Microservice Deployment (Kubernetes cluster)   1.0    $4,500.00    8.25%    $4,500.00
+03    Security & PII Redaction Guardrail Module Development        25.0    $160.00      8.25%    $4,000.00
+04    High-Throughput Vector DB Cluster Optimization & Benchmarking 1.0    $2,200.00    8.25%    $2,200.00
+------------------------------------------------------------------------------------------------------------------------
+
+Subtotal:              $18,100.00
+Sales Tax (8.25%):      $1,493.25
+Enterprise Discount:     -$600.00
+Shipping / Handling:        $0.00
+---------------------------------
+TOTAL PAYABLE:         $18,993.25 USD
+
+PAYMENT INSTRUCTIONS:
+Please remit electronic wire or ACH payment to:
+Bank Name:        JPMorgan Chase Bank, N.A.
+Account Holder:   Cyberdynamic Enterprises LLC
+Account Number:   8849102849
+Routing / ABA:    111000614
+SWIFT / BIC:      CHASUS33AXX
+
+Notes: Late payments subject to a 1.5% compounding monthly surcharge. Thank you for partnering with Cyberdynamic.

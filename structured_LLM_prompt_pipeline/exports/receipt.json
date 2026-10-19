@@ -1,0 +1,71 @@
+{
+  "vendor": {
+    "name": "ACE HARDWARE & INDUSTRIAL SUPPLY",
+    "address": "452 Innovation Parkway, Austin, TX 78759",
+    "tax_id": "US-84920194",
+    "email": "billing@omnitech.io",
+    "phone": "+1 (512) 800-4491",
+    "website": "https://omnitech.io"
+  },
+  "customer": {
+    "name": "Global Horizon Logistics Corp.",
+    "billing_address": "880 Pacific Highway, Suite 1200, San Diego, CA 92101",
+    "shipping_address": "880 Pacific Highway, Suite 1200, San Diego, CA 92101",
+    "email": "invoices@globalhorizon.com",
+    "phone": "+1 (619) 555-0144",
+    "contact_person": "David Martinez"
+  },
+  "metadata": {
+    "invoice_number": "TXN-994102-A",
+    "issue_date": "2024-10-18",
+    "due_date": "2024-11-17",
+    "po_number": "PO-88219",
+    "currency": "USD",
+    "payment_terms": "Net 30 Days"
+  },
+  "line_items": [
+    {
+      "item_id": "SVC-CLOUD-01",
+      "description": "Multi-Tenant Cloud Infrastructure Provisioning & Setup",
+      "quantity": 1.0,
+      "unit_price": 2400.0,
+      "tax_rate_pct": 8.0,
+      "line_total": 2400.0
+    },
+    {
+      "item_id": "CON-AI-OPS",
+      "description": "Generative AI Prompt Pipeline & Evaluation Architecture Consulting",
+      "quantity": 20.0,
+      "unit_price": 150.0,
+      "tax_rate_pct": 8.0,
+      "line_total": 3000.0
+    },
+    {
+      "item_id": "LIC-SEC-ENTERPRISE",
+      "description": "Enterprise Security Gateway Annual License (Tier 2)",
+      "quantity": 2.0,
+      "unit_price": 450.0,
+      "tax_rate_pct": 8.0,
+      "line_total": 900.0
+    }
+  ],
+  "financials": {
+    "subtotal": 6300.0,
+    "tax_amount": 504.0,
+    "discount_amount": 300.0,
+    "shipping_fee": 0.0,
+    "grand_total": 6504.0,
+    "currency": "USD",
+    "payment_status": "Unpaid"
+  },
+  "payment_info": {
+    "bank_name": "JPMorgan Chase Bank, N.A.",
+    "account_number": "78201938210",
+    "routing_or_swift": "CHASUS33XXX",
+    "ifsc_code": null,
+    "payment_method": "ACH / Wire Transfer"
+  },
+  "notes": "Thank you for your business. Please remit payment within 30 days.",
+  "extraction_confidence": 0.98,
+  "math_discrepancy_detected": false
+}

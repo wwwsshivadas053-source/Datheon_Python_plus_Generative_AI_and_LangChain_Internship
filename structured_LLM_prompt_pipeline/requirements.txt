@@ -1,0 +1,30 @@
+# Core Pydantic & Validation
+pydantic>=2.10.0
+pydantic-core>=2.27.0
+typing-extensions>=4.12.0
+
+# LLM Providers & SDKs
+google-genai>=2.0.0
+google-generativeai>=0.8.0
+openai>=1.50.0
+
+# LangChain Ecosystem
+langchain>=0.3.0
+langchain-core>=0.3.0
+langchain-google-genai>=2.0.0
+langchain-openai>=0.2.0
+
+# Document Ingestion (.pdf, .docx, .txt)
+pymupdf>=1.24.0
+python-docx>=1.1.0
+
+# Terminal UI & Visualization
+rich>=13.8.0
+python-dotenv>=1.0.1
+
+# Web Dashboard
+flask>=3.0.0
+
+# Testing & Quality Assurance
+pytest>=8.3.0
+requests>=2.32.0

@@ -1,0 +1,46 @@
+DR. AARAV KRISHNAN
+Austin, TX | (512) 555-0182 | aarav.krishnan.ai@gmail.com
+LinkedIn: https://linkedin.com/in/aarav-krishnan-ai | GitHub: https://github.com/aarav-krishnan
+
+PROFESSIONAL SUMMARY
+Senior Generative AI Architect and Machine Learning Staff Engineer with 8+ years of technical experience pioneering large language model (LLM) agents, retrieval-augmented generation (RAG), and high-throughput model serving pipelines on cloud infrastructure. Proven track record leading engineering squads in deploying models that scale to 50M+ monthly users.
+
+WORK EXPERIENCE
+Staff AI Engineer & LLM Lead | HyperScale Intelligence Inc., Austin, TX
+January 2022 - Present
+- Designed and operationalized enterprise-grade structured extraction pipelines processing multimodal financial filings with 99.4% Pydantic schema validation accuracy.
+- Architected multi-agent autonomous decision workflows using LangChain, LangGraph, and Google Gemini API, reducing underwriting review cycle time from 4 days to 12 minutes.
+- Optimized model inference latency by 58% and cloud compute spend by $1.2M annually by implementing TensorRT-LLM, vLLM continuous batching, and speculative decoding.
+- Mentored a distributed team of 9 machine learning engineers and fostered internal best practices for prompt evaluation and guardrail engineering.
+
+Senior Machine Learning Engineer | DeepData Labs, Seattle, WA
+July 2018 - December 2021
+- Developed core transformer-based document intelligence platform parsing invoices, receipts, and clinical trial records using PyTorch and Hugging Face.
+- Built distributed vector search microservices using Qdrant and Milvus over 50M embedding vectors with sub-25ms P99 query latency.
+- Authored production CI/CD pipelines incorporating automated prompt regression testing, BLEU/ROUGE scoring, and model drift telemetry.
+
+Machine Learning Researcher | Apex Robotics & Vision, Boston, MA
+June 2016 - June 2018
+- Researched zero-shot object classification and deep visual feature embeddings for industrial autonomous sorting robots.
+
+EDUCATION
+Carnegie Mellon University, Pittsburgh, PA
+Doctor of Philosophy (Ph.D.) in Electrical & Computer Engineering (Focus: Deep Learning) | 2012 - 2016
+Indian Institute of Technology (IIT) Madras
+Bachelor of Technology (B.Tech) in Computer Science & Engineering | 2008 - 2012 | Institute Gold Medal
+
+TECHNICAL SKILLS
+- Programming Languages: Python, C++, Go, SQL, Bash
+- Generative AI & ML: LangChain, LangGraph, PyTorch, Transformers, Hugging Face, vLLM, DeepSpeed, LoRA/QLoRA
+- Cloud & Infrastructure: AWS (SageMaker, EKS, Lambda), Google Cloud (Vertex AI), Docker, Kubernetes, Terraform
+- Databases & Vector Stores: PostgreSQL, Pinecone, Qdrant, Milvus, Redis, MongoDB
+- Methodologies: Agile/Scrum, Prompt Engineering, Agentic Workflows, MLOps, System Design
+
+CERTIFICATIONS & PATENTS
+- AWS Certified Machine Learning - Specialty (2023)
+- Google Cloud Professional Machine Learning Engineer (2022)
+- US Patent #11,842,109: Distributed Retrieval and Token Caching in Large Scale Transformer Architectures
+
+LANGUAGES
+- English (Native / Bilingual)
+- Hindi (Fluent)

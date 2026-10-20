@@ -13,11 +13,22 @@
 
 An enterprise-grade, multi-model document extraction pipeline engineered to transform complex, messy, and unstructured text documents (such as invoices, receipts, resumes, and CVs) into strictly validated, typed, and mathematically cross-checked JSON schemas.
 
+<br>
+
+<p align="center">
+  <a href="assets/screenshots/web_invoice_extraction.png">
+    <img src="assets/screenshots/web_invoice_extraction.png" alt="Structured LLM Prompt Pipeline Interactive Dashboard" width="100%" style="max-width: 1000px; border-radius: 12px; box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45); border: 1px solid rgba(255, 255, 255, 0.1);">
+  </a>
+  <br>
+  <em><b>Interactive Web Dashboard:</b> Document Ingestion, Dynamic Prompt Injection, Real-Time Pydantic Validation, and JSON Tree Inspection.</em>
+</p>
+
 ---
 
 ## 📑 Table of Contents
 - [Problem Statement & Motivation](#-problem-statement--motivation)
 - [System Architecture & Workflow](#-system-architecture--workflow)
+- [Visual Showcase & Output Screenshots](#-visual-showcase--output-screenshots)
 - [Core Engineering Pillars](#-core-engineering-pillars)
   - [1. Parameterized Prompt Engineering & Few-Shot Learning](#1-parameterized-prompt-engineering--few-shot-learning)
   - [2. Dual Domain Pydantic Schemas with Mathematical Cross-Validation](#2-dual-domain-pydantic-schemas-with-mathematical-cross-validation)
@@ -120,6 +131,60 @@ This project delivers a **fault-tolerant, schema-constrained pipeline** that com
          │ - Retries LLM (Up to 3x)      │
          └───────────────────────────────┘
 ```
+
+---
+
+## 📸 Visual Showcase & Output Screenshots
+
+<div align="center">
+  <h3>⚡ Enterprise Document Extraction Across Web & CLI Interfaces</h3>
+  <p><i>Responsive, high-fidelity outputs capturing Pydantic validation, reflexions, entity KPI cards, and terminal execution.</i></p>
+</div>
+
+<table width="100%" border="0" cellspacing="12" cellpadding="0">
+  <tr>
+    <td width="50%" align="center" valign="top">
+      <h4>🧾 Tax Invoice Extraction & KPI Cards</h4>
+      <a href="assets/screenshots/web_invoice_extraction.png">
+        <img src="assets/screenshots/web_invoice_extraction.png" alt="Tax Invoice Extraction & Pydantic Validation" width="100%" style="border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 4px 16px rgba(0,0,0,0.3);">
+      </a>
+      <p align="left"><sub><b>Capabilities:</b> Ingestion of messy freight invoices, real-time KPI cards (Vendor, Invoice #, Total Payable), dual-pane source text editor, and syntax-highlighted validated JSON tree.</sub></p>
+    </td>
+    <td width="50%" align="center" valign="top">
+      <h4>👤 Resume & Candidate Skill Taxonomy</h4>
+      <a href="assets/screenshots/web_resume_extraction.png">
+        <img src="assets/screenshots/web_resume_extraction.png" alt="Resume Candidate Extraction" width="100%" style="border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 4px 16px rgba(0,0,0,0.3);">
+      </a>
+      <p align="left"><sub><b>Capabilities:</b> Full candidate profile structuring with automated seniority classification (<code>Lead</code>, <code>Senior</code>, etc.), total years of experience, and categorized skill taxonomy matrices.</sub></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center" valign="top">
+      <h4>⚡ Agentic Self-Healing Reflexion Loop</h4>
+      <a href="assets/screenshots/web_self_healing_reflexion.png">
+        <img src="assets/screenshots/web_self_healing_reflexion.png" alt="Agentic Self-Healing Reflexion" width="100%" style="border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 4px 16px rgba(0,0,0,0.3);">
+      </a>
+      <p align="left"><sub><b>Capabilities:</b> Automated fault recovery: Attempt 1 schema violation caught, reflexion feedback prompt generated, and corrected JSON healed on Attempt 2 with audit trail.</sub></p>
+    </td>
+    <td width="50%" align="center" valign="top">
+      <h4>🔍 Dynamic Parameterized Prompt Inspector</h4>
+      <a href="assets/screenshots/web_prompt_inspector.png">
+        <img src="assets/screenshots/web_prompt_inspector.png" alt="Dynamic Parameterized Prompt Inspector" width="100%" style="border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 4px 16px rgba(0,0,0,0.3);">
+      </a>
+      <p align="left"><sub><b>Capabilities:</b> Real-time prompt inspection displaying system instructions, zero-hallucination constraints, dynamic JSON schema injection, and few-shot exemplars.</sub></p>
+    </td>
+  </tr>
+</table>
+
+<br>
+
+<div align="center">
+  <h4>🖥️ Executive Terminal CLI Interface (Rich TrueColor Output)</h4>
+  <a href="assets/screenshots/terminal_cli_demo.png">
+    <img src="assets/screenshots/terminal_cli_demo.png" alt="Executive Terminal CLI Output" width="100%" style="max-width: 960px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
+  </a>
+  <p><sub><b>Terminal CLI Output:</b> Formatted Rich status panels, itemized billing breakdown tables, automated subtotal/tax/shipping mathematical reconciliation, and colorized JSON preview.</sub></p>
+</div>
 
 ---
 
@@ -237,6 +302,12 @@ When an extraction fails Pydantic schema validation or JSON decoding:
 
 A modern, glassmorphic dark-mode web application designed with Vanilla CSS, smooth gradients, and micro-animations.
 
+<p align="center">
+  <a href="assets/screenshots/web_invoice_extraction.png">
+    <img src="assets/screenshots/web_invoice_extraction.png" alt="Interactive Web Dashboard UI" width="100%" style="max-width: 950px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
+  </a>
+</p>
+
 ### Web Dashboard Features:
 - **One-Click Preloaded Samples**: Instant loading of enterprise consulting invoices, noisy hardware store receipts, international freight bills, and diverse technical resumes.
 - **Drag-and-Drop Ingestion**: Upload `.txt`, `.pdf`, or `.docx` documents directly.
@@ -258,6 +329,12 @@ Open **`http://127.0.0.1:5000`** in your browser.
 [`run_demo.py`](file:///d:/structured_LLM_prompt_pipeline/run_demo.py)
 
 The CLI uses the `rich` library to render tables, spinners, colored JSON trees, and pipeline audit trails.
+
+<p align="center">
+  <a href="assets/screenshots/terminal_cli_demo.png">
+    <img src="assets/screenshots/terminal_cli_demo.png" alt="Terminal CLI Rich Output" width="100%" style="max-width: 950px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
+  </a>
+</p>
 
 ### CLI Command Options:
 | Flag | Description | Default |

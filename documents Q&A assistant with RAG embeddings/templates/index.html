@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Document Q&A Assistant with RAG and Vector Embeddings - Powered by LangChain, ChromaDB, FAISS, and Flask.">
+    <title>DocuRAG Assistant | Document Q&A with Vector Embeddings</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome for modern crisp icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="app-background">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-brand">
+            <div class="brand-logo">
+                <i class="fa-solid fa-brain"></i>
+            </div>
+            <div class="brand-text">
+                <span class="brand-title">DocuRAG <span class="gradient-text">Studio</span></span>
+                <span class="brand-subtitle">RAG & Vector Embeddings Q&A Assistant</span>
+            </div>
+        </div>
+
+        <div class="nav-actions">
+            <!-- Vector Store Toggle -->
+            <div class="store-toggle-container" title="Switch active vector database engine">
+                <span class="toggle-label"><i class="fa-solid fa-database"></i> Vector Engine:</span>
+                <div class="toggle-switch-group">
+                    <button id="btn-store-faiss" class="btn-store active" onclick="switchVectorStore('faiss')">
+                        <i class="fa-solid fa-bolt"></i> FAISS
+                    </button>
+                    <button id="btn-store-chroma" class="btn-store" onclick="switchVectorStore('chroma')">
+                        <i class="fa-solid fa-layer-group"></i> ChromaDB
+                    </button>
+                </div>
+            </div>
+
+            <!-- Settings Button -->
+            <button id="btn-open-settings" class="btn-icon" title="Configure LLM & Hyperparameters" onclick="openSettingsModal()">
+                <i class="fa-solid fa-sliders"></i>
+                <span>Settings</span>
+            </button>
+
+            <!-- Reset All -->
+            <button id="btn-clear-all" class="btn-icon btn-danger-subtle" title="Clear documents & memory" onclick="clearAllData()">
+                <i class="fa-solid fa-trash-can"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Application Grid -->
+    <main class="main-container">
+        <!-- Left Sidebar: Document Management & Vector Indexing Stats -->
+        <aside class="sidebar-panel">
+            <!-- Upload Card -->
+            <div class="glass-card upload-card">
+                <div class="card-header">
+                    <div class="header-icon-title">
+                        <i class="fa-solid fa-cloud-arrow-up text-cyan"></i>
+                        <h3>Document Ingestion</h3>
+                    </div>
+                    <span class="badge badge-accent">PDF / TXT / DOCX</span>
+                </div>
+
+                <!-- Drag & Drop Zone -->
+                <div id="drop-zone" class="drop-zone">
+                    <input type="file" id="file-input" multiple accept=".pdf,.txt,.docx,.md" class="file-input-hidden">
+                    <div class="drop-zone-content">
+                        <div class="upload-pulse-icon">
+                            <i class="fa-solid fa-file-circle-plus"></i>
+                        </div>
+                        <p class="drop-main-text">Drag & drop your files here</p>
+                        <p class="drop-sub-text">or <span class="text-link">browse files</span> from your computer</p>
+                    </div>
+                </div>
+
+                <!-- One Click Sample Document Loader -->
+                <div class="sample-loader-box">
+                    <div class="sample-info">
+                        <i class="fa-solid fa-file-lines text-purple"></i>
+                        <div>
+                            <strong>Sample Research PDF</strong>
+                            <span>AI, RAG & Vector Embeddings</span>
+                        </div>
+                    </div>
+                    <button id="btn-load-sample" class="btn-secondary btn-sm" onclick="loadSampleDocument()">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Load Sample
+                    </button>
+                </div>
+
+                <!-- Upload Progress Bar (hidden by default) -->
+                <div id="upload-progress-container" class="upload-progress-container hidden">
+                    <div class="progress-info">
+                        <span id="upload-status-text">Parsing and embedding chunks...</span>
+                        <span id="upload-status-percent">0%</span>
+                    </div>
+                    <div class="progress-track">
+                        <div id="upload-progress-bar" class="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vector Index Metrics Card -->
+            <div class="glass-card metrics-card">
+                <div class="card-header">
+                    <div class="header-icon-title">
+                        <i class="fa-solid fa-chart-simple text-purple"></i>
+                        <h3>Vector Store Status</h3>
+                    </div>
+                    <span id="badge-active-store" class="badge badge-cyan">FAISS INDEX</span>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <span class="metric-label">Documents</span>
+                        <span id="metric-docs-count" class="metric-value">0</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-label">Vector Chunks</span>
+                        <span id="metric-chunks-count" class="metric-value">0</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-label">Chunk Size</span>
+                        <span id="metric-chunk-size" class="metric-value">800</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-label">Overlap</span>
+                        <span id="metric-chunk-overlap" class="metric-value">150</span>
+                    </div>
+                </div>
+
+                <!-- Indexed Files List -->
+                <div class="indexed-files-section">
+                    <div class="files-list-header">
+                        <h4>Loaded Corpora</h4>
+                        <span id="files-count-badge" class="badge-pill">0 files</span>
+                    </div>
+                    <div id="indexed-files-list" class="indexed-files-list">
+                        <div class="empty-state">
+                            <i class="fa-solid fa-folder-open"></i>
+                            <p>No documents indexed yet.</p>
+                            <span>Upload a PDF or load the sample paper above.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right Panel: Interactive RAG Chat & Source Attribution -->
+        <section class="chat-panel glass-card">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <div class="avatar-robot">
+                        <i class="fa-solid fa-robot"></i>
+                        <span class="online-indicator"></span>
+                    </div>
+                    <div>
+                        <h2>RAG Document Assistant</h2>
+                        <p id="chat-status-subtitle">Strict Grounding Enabled &bull; Source Citations Active</p>
+                    </div>
+                </div>
+
+                <div class="chat-badges">
+                    <span id="badge-model-provider" class="badge badge-outline">
+                        <i class="fa-solid fa-microchip"></i> Gemini / Local Hybrid
+                    </span>
+                    <button class="btn-icon-subtle" title="Clear chat window" onclick="clearChatMessages()">
+                        <i class="fa-solid fa-eraser"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Messages Window -->
+            <div id="chat-messages" class="chat-messages">
+                <!-- Welcome Message -->
+                <div class="message-wrapper assistant">
+                    <div class="message-avatar">
+                        <i class="fa-solid fa-sparkles"></i>
+                    </div>
+                    <div class="message-bubble">
+                        <div class="message-header-meta">
+                            <strong>DocuRAG Assistant</strong>
+                            <span class="timestamp">Just now</span>
+                        </div>
+                        <div class="message-content">
+                            <p>Hello! I am your <strong>Document Q&A Assistant</strong> built with <strong>LangChain, ChromaDB/FAISS, and Retrieval-Augmented Generation (RAG)</strong>.</p>
+                            <p>Here is what I can do for you:</p>
+                            <ul>
+                                <li><strong>Ground Answers Strictly in Documents:</strong> Answers are synthesized exclusively from uploaded PDFs/text without hallucination.</li>
+                                <li><strong>Precise Source Page Citations:</strong> Every factual claim points directly to the exact file and page number.</li>
+                                <li><strong>Dual Vector Store Support:</strong> Effortlessly switch between <strong>FAISS</strong> and <strong>ChromaDB</strong>.</li>
+                            </ul>
+                            <div class="quick-prompts-container">
+                                <span class="quick-prompts-label">Try asking:</span>
+                                <div class="prompt-chips">
+                                    <button class="prompt-chip" onclick="fillPrompt('What is the chunk overlap used in the text splitter?')">
+                                        "What is the chunk overlap used?"
+                                    </button>
+                                    <button class="prompt-chip" onclick="fillPrompt('Compare FAISS and ChromaDB search latency.')">
+                                        "Compare FAISS vs ChromaDB latency"
+                                    </button>
+                                    <button class="prompt-chip" onclick="fillPrompt('What are the four strict grounding rules for hallucination prevention?')">
+                                        "What are the hallucination prevention rules?"
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Bar -->
+            <div class="chat-input-bar">
+                <form id="chat-form" onsubmit="handleChatSubmit(event)">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="query-input" 
+                            rows="1" 
+                            placeholder="Ask any question based on your uploaded documents..." 
+                            onkeydown="handleTextareaKeydown(event)"
+                            required></textarea>
+                        <button type="submit" id="btn-send-query" class="btn-primary btn-send" title="Send question">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+                <div class="input-footer-hint">
+                    <span><i class="fa-solid fa-shield-halved"></i> Strict anti-hallucination filter active</span>
+                    <span>Press <kbd>Enter</kbd> to send, <kbd>Shift+Enter</kbd> for newline</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal-overlay hidden" onclick="closeSettingsModalOnOutsideClick(event)">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <div class="header-icon-title">
+                    <i class="fa-solid fa-gear text-cyan"></i>
+                    <h3>Pipeline & Model Configuration</h3>
+                </div>
+                <button class="btn-close" onclick="closeSettingsModal()">&times;</button>
+            </div>
+
+            <form id="settings-form" onsubmit="handleSettingsSave(event)">
+                <div class="modal-body">
+                    <!-- LLM Provider Selection -->
+                    <div class="form-group">
+                        <label for="setting-provider">LLM Provider</label>
+                        <select id="setting-provider" class="form-control" onchange="toggleApiKeyFields()">
+                            <option value="gemini">Google Gemini (Gemini 2.0 / 1.5 Flash - Recommended)</option>
+                            <option value="openai">OpenAI (GPT-4o Mini / GPT-4o)</option>
+                            <option value="local">Local Extractive Synthesizer (Offline Zero-Key Mode)</option>
+                        </select>
+                        <small class="form-hint">Choose between cloud generative models or zero-network offline extraction.</small>
+                    </div>
+
+                    <!-- Google Gemini API Key -->
+                    <div id="group-gemini-key" class="form-group">
+                        <label for="setting-google-key">Google Gemini API Key</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="setting-google-key" class="form-control" placeholder="AIzaSy...">
+                            <button type="button" class="btn-toggle-eye" onclick="togglePasswordVisibility('setting-google-key')">
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+                        </div>
+                        <small class="form-hint">Get a free key from Google AI Studio (ai.google.dev).</small>
+                    </div>
+
+                    <!-- OpenAI API Key -->
+                    <div id="group-openai-key" class="form-group hidden">
+                        <label for="setting-openai-key">OpenAI API Key</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="setting-openai-key" class="form-control" placeholder="sk-...">
+                            <button type="button" class="btn-toggle-eye" onclick="togglePasswordVisibility('setting-openai-key')">
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+                        </div>
+                        <small class="form-hint">Standard OpenAI platform key.</small>
+                    </div>
+
+                    <!-- Hyperparameters Grid -->
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="setting-top-k">Top-K Retrieval</label>
+                            <input type="number" id="setting-top-k" class="form-control" min="1" max="10" value="4">
+                            <small class="form-hint">Number of context passages passed to LLM.</small>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="setting-temperature">LLM Temperature</label>
+                            <input type="number" id="setting-temperature" class="form-control" min="0.0" max="1.0" step="0.05" value="0.1">
+                            <small class="form-hint">0.0 = deterministic and factual.</small>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="setting-chunk-size">Chunk Size (chars)</label>
+                            <input type="number" id="setting-chunk-size" class="form-control" min="200" max="2000" step="50" value="800">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="setting-chunk-overlap">Chunk Overlap (chars)</label>
+                            <input type="number" id="setting-chunk-overlap" class="form-control" min="20" max="500" step="10" value="150">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeSettingsModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">
+                        <i class="fa-solid fa-floppy-disk"></i> Save Configuration
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

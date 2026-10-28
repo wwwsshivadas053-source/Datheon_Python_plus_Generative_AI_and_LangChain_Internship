@@ -80,7 +80,7 @@ graph TD
 
 ---
 
-![Uploading Screenshot 2026-10-28 110107.png…]()
+<img width="1917" height="907" alt="Screenshot 2026-10-28 110107" src="https://github.com/user-attachments/assets/72c78e0b-7186-4b5c-8da0-7d4f2275edd0" />
 
 
 ---

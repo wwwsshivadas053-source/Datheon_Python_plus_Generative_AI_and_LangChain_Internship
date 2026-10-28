@@ -76,6 +76,16 @@ graph TD
     style SYNTHESIS fill:#0F172A,stroke:#EC4899,stroke-width:2px,color:#F8FAFC
 ```
 
+##Screenshot
+
+---
+
+![Uploading Screenshot 2026-10-28 110107.png…]()
+
+
+---
+
+
 ---
 
 ## ✨ Key Features

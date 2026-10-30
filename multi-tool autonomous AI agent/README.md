@@ -130,6 +130,15 @@ multi-tool-autonomous-ai-agent/
 
 ---
 
+##Screenshot
+
+<img width="1917" height="902" alt="multi" src="https://github.com/user-attachments/assets/d2e7e345-5358-485e-b478-ba0a094fe122" />
+
+---
+
+
+---
+
 ## 🛠 Tools Overview
 
 ### 1. Web Search Tool (`web_search`)

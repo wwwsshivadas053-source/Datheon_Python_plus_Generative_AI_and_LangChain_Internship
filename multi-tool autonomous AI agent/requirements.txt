@@ -1,0 +1,36 @@
+# Core LangChain stack
+langchain>=0.3.0
+langchain-core>=0.3.0
+langchain-community>=0.3.0
+langchain-classic>=1.0.0
+langchain-google-genai>=2.0.0   # Google Gemini support
+langchain-openai>=0.2.0         # OpenAI GPT support
+
+# Web Search
+duckduckgo-search>=6.0.0        # DuckDuckGo (no API key needed)
+tavily-python>=0.3.0            # Tavily AI search (optional)
+
+# Web UI (Flask)
+Flask>=3.0.0
+flask-cors>=4.0.0
+
+# Math & Science
+numpy>=1.26.0
+scipy>=1.13.0
+sympy>=1.13.0                   # Symbolic algebra
+numexpr>=2.8.0                  # Fast numerical evaluation
+
+# Document reading
+pypdf>=4.0.0                    # PDF reading
+python-docx>=1.1.0              # Word document reading
+beautifulsoup4>=4.12.0          # HTML parsing
+
+# Utilities
+python-dotenv>=1.0.0            # .env file loading
+colorama>=0.4.6                 # Windows terminal colours
+requests>=2.31.0                # HTTP client
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0               # Coverage reports
+

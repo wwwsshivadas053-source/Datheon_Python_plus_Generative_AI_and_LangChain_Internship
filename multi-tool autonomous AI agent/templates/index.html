@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multi-Tool AI Agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=4" />
+</head>
+<body>
+
+<!-- ── Sidebar ──────────────────────────────────────────────────────────── -->
+<aside class="sidebar" id="sidebar">
+
+  <div class="sidebar-brand">
+    <div class="brand-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="10" stroke="url(#g1)" stroke-width="1.5"/>
+        <path d="M8 12h8M12 8l4 4-4 4" stroke="url(#g1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <span class="brand-name">AI Agent</span>
+      <span class="brand-sub">Multi-Tool · ReAct</span>
+    </div>
+  </div>
+
+  <!-- Status card -->
+  <div class="status-card" id="statusCard">
+    <div class="status-dot" id="statusDot"></div>
+    <div class="status-info">
+      <span class="status-label">Connecting…</span>
+      <span class="status-model" id="statusModel">—</span>
+    </div>
+  </div>
+
+  <!-- Tools list -->
+  <div class="sidebar-section">
+    <p class="sidebar-label">TOOLS</p>
+    <div class="tool-item active">
+      <span class="tool-icon">🔍</span>
+      <span class="tool-name">Web Search</span>
+      <span class="tool-badge">DuckDuckGo</span>
+    </div>
+    <div class="tool-item active">
+      <span class="tool-icon">🧮</span>
+      <span class="tool-name">Calculator</span>
+      <span class="tool-badge">SymPy</span>
+    </div>
+    <div class="tool-item active">
+      <span class="tool-icon">📄</span>
+      <span class="tool-name">File Reader</span>
+      <span class="tool-badge">PDF · DOCX</span>
+    </div>
+  </div>
+
+  <!-- Example queries -->
+  <div class="sidebar-section">
+    <p class="sidebar-label">EXAMPLES</p>
+    <button class="example-btn" onclick="useExample(this)">What is the latest news about AI?</button>
+    <button class="example-btn" onclick="useExample(this)">Calculate compound interest on $5000 at 8% for 3 years</button>
+    <button class="example-btn" onclick="useExample(this)">Solve x² - 7x + 12 = 0</button>
+    <button class="example-btn" onclick="useExample(this)">Search speed of light and calculate time to Moon</button>
+    <button class="example-btn" onclick="useExample(this)">List files in sample_data folder</button>
+  </div>
+
+  <div class="sidebar-footer">
+    <button class="clear-btn" onclick="clearChat()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+      Clear Chat
+    </button>
+    <span class="version-tag">LangChain · Python 3</span>
+  </div>
+</aside>
+
+<!-- ── Main area ─────────────────────────────────────────────────────────── -->
+<div class="main" id="main">
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <button class="menu-btn" onclick="toggleSidebar()" title="Toggle Sidebar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <h1 class="topbar-title">Multi-Tool Autonomous AI Agent</h1>
+    <div class="topbar-pills">
+      <span class="pill pill-purple">ReAct</span>
+      <span class="pill pill-blue" id="topProvider">Gemini</span>
+    </div>
+  </header>
+
+  <!-- Chat window -->
+  <div class="chat-window" id="chatWindow">
+    <!-- Welcome -->
+    <div class="welcome" id="welcome">
+      <div class="welcome-icon">🤖</div>
+      <h2 class="welcome-title">How can I help you today?</h2>
+      <p class="welcome-sub">I can search the web, solve math problems, and read your local files.<br/>I'll show you every reasoning step along the way.</p>
+      <div class="welcome-chips">
+        <button class="chip" onclick="useExample(this)">🔍 Search latest AI news</button>
+        <button class="chip" onclick="useExample(this)">🧮 Calculate sqrt(144) + log(1000)</button>
+        <button class="chip" onclick="useExample(this)">📄 Read sample_data/employees.csv</button>
+        <button class="chip" onclick="useExample(this)">🔀 Speed of light × distance to Moon</button>
+      </div>
+    </div>
+
+    <!-- Messages injected here by JS -->
+    <div id="messages"></div>
+  </div>
+
+  <!-- Input area -->
+  <div class="input-area">
+    <div class="input-wrap">
+      <textarea
+        id="queryInput"
+        class="query-input"
+        placeholder="Ask anything — web search, calculations, file reading…"
+        rows="1"
+        onkeydown="handleKey(event)"
+        oninput="autoResize(this)"
+      ></textarea>
+      <button class="send-btn" id="sendBtn" onclick="sendQuery()" title="Send">
+        <svg id="sendIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+        <svg id="loadIcon" class="spin hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+        </svg>
+      </button>
+    </div>
+    <p class="input-hint">Press <kbd>Enter</kbd> to send · <kbd>Shift+Enter</kbd> for new line · <kbd>/clear</kbd> to reset</p>
+  </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/app.js') }}?v=4"></script>
+</body>
+</html>
+

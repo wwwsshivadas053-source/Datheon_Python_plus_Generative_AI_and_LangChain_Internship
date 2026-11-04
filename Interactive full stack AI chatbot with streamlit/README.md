@@ -123,6 +123,12 @@ Interactive-Full-Stack-AI-Chatbot/
 ```
 
 ---
+## UI/UX Screenshot
+
+<img width="1901" height="911" alt="streamlit" src="https://github.com/user-attachments/assets/89c2b582-d046-425f-ba17-874100f68b5a" />
+
+---
+---
 
 ## 💻 Prerequisites & Requirements
 

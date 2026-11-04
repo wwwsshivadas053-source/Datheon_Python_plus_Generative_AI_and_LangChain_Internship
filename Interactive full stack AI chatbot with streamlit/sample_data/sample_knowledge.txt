@@ -1,0 +1,27 @@
+# Project Nexus: Next-Generation Enterprise AI Architecture
+Document ID: ENG-SPEC-2026-X9
+Classification: Confidential / Internal Engineering Whitepaper
+Author: Autonomous Systems & Agentic Infrastructure Team
+
+## 1. Executive Summary
+Project Nexus is an enterprise-scale conversational AI and real-time knowledge retrieval platform. Designed to bridge state-of-the-art Large Language Models (Gemini 2.5, GPT-4o, Claude 3.5, and Llama 3.3) with organizational vector memory, Nexus delivers sub-100ms first-token latency, robust conversation buffer management, and precise multi-source citation.
+
+## 2. Core Pillars of the Architecture
+The Nexus system is composed of four decoupled subsystems:
+1. Streamlit Presentation Layer: A responsive, reactive user interface with custom CSS styling, token-by-token streaming via st.write_stream, and session telemetry.
+2. Conversation Memory Buffer: A windowed state manager ensuring dialogue continuity without exceeding context window constraints or leaking cross-session state.
+3. In-Memory Vector RAG Engine: Sublinear term frequency-inverse document frequency (TF-IDF) and dense vector projection with cosine similarity scoring, supporting PDF, DOCX, CSV, and Markdown.
+4. Dynamic Provider Orchestrator: Multi-model abstraction layer providing automatic failover between Google Gemini, OpenAI, Groq, Anthropic, and local deterministic simulation.
+
+## 3. Deployment Specifications & Port Configuration
+- Web Application Port: 8501 (Default HTTP Streamlit bind)
+- Maximum In-Memory Chunks: 50,000 document segments per session
+- Chunk Size Configuration: 700 characters with 120 character sliding window overlap
+- Supported Embedding Dimensions: 1536-d (OpenAI text-embedding-3-small), 768-d (Google text-embedding-004), and Sparse TF-IDF N-grams (1, 2)
+- Target Latency SLA: Streaming onset < 250 milliseconds; RAG retrieval < 20 milliseconds
+
+## 4. Security & Isolation Guidelines
+- In accordance with Zero-Trust guidelines, all session vectors reside strictly in session memory and are flushed upon session termination or manual reset.
+- API keys entered via the secure sidebar input mask are never persisted to disk or sent to external telemetry endpoints.
+- Tool executions are sandboxed with restricted namespaces, prohibiting unauthorized os, sys, or subprocess system calls.
+

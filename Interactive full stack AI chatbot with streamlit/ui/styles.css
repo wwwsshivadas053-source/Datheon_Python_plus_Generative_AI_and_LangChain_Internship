@@ -1,0 +1,172 @@
+/* Modern Professional UI Theme for Full-Stack AI Chatbot */
+
+/* Main container tweaks */
+.block-container {
+    padding-top: 1.8rem;
+    padding-bottom: 3.5rem;
+    max-width: 950px;
+}
+
+/* Header container */
+.app-header {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.25rem 1.75rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.app-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #f8fafc;
+    letter-spacing: -0.025em;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.app-subtitle {
+    font-size: 0.95rem;
+    color: #94a3b8;
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+}
+
+/* Badge tags */
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge-primary {
+    background: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.35);
+}
+
+.badge-success {
+    background: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.badge-warning {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+/* Telemetry stat cards */
+.stat-card {
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 0.6rem 0.9rem;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #f1f5f9;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* Source citation card */
+.source-card {
+    background: rgba(15, 23, 42, 0.5);
+    border-left: 3px solid #3b82f6;
+    border-radius: 4px;
+    padding: 0.6rem 0.8rem;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.source-title {
+    font-weight: 600;
+    color: #93c5fd;
+    margin-bottom: 0.2rem;
+}
+
+.source-snippet {
+    color: #cbd5e1;
+    font-style: italic;
+    line-height: 1.35;
+}
+
+/* Empty chat prompt container */
+.welcome-card {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    margin: 2rem 0;
+    background: rgba(30, 41, 59, 0.2);
+}
+
+.welcome-icon {
+    font-size: 2.8rem;
+    margin-bottom: 0.75rem;
+}
+
+.welcome-heading {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    margin-bottom: 0.4rem;
+}
+
+.welcome-text {
+    font-size: 0.95rem;
+    color: #94a3b8;
+    max-width: 500px;
+    margin: 0 auto 1.5rem auto;
+    line-height: 1.5;
+}
+
+.suggestion-pill {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.85rem;
+    color: #cbd5e1;
+    margin: 0.25rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.suggestion-pill:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: #3b82f6;
+    color: #ffffff;
+}
+
+/* Streamlit button aesthetic improvements */
+div.stButton > button {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+/* Chat input styling adjustments */
+.stChatInput {
+    border-radius: 12px;
+}
+
